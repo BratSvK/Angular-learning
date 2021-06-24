@@ -6,6 +6,10 @@
     margin-right: 60px;
 }
 
+li > a.active {
+    color: crimson;
+}
+
 
 @media (max-width: 1200px) {
     #searchForm {

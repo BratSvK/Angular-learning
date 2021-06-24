@@ -1,15 +1,23 @@
 import { Injectable, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 // becouse of dependency injection
 @Injectable({
   providedIn: 'root'
 })
+
+// asynch call to server 
 export class EventService {
 
   constructor() { }
 
   getEvents(){
-    return EVENTS;
+    // creating a stream of data => observable 
+    let subject  = new Subject();
+
+    setTimeout(() => { subject.next(EVENTS); subject.complete();} , 1000);      // bad for partialy load's the page 
+
+    return subject;
   }
 
 

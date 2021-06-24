@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EventService } from '../_services/event.service';
 
@@ -9,16 +10,19 @@ import { EventService } from '../_services/event.service';
 
 export class EventsListComponent implements OnInit {
 
-    events: any[];
+    events: any;
 
-    constructor(private eventService: EventService, private toastr: ToastrService) {
+    constructor(private eventService: EventService, private toastr: ToastrService, private route: ActivatedRoute) {
 
     }
 
 
   // better put long http calls here over contructor
   ngOnInit(): void {
-    this.events = this.eventService.getEvents();
+    // data we getting through resolver in route we have all events 
+    this.events = this.route.snapshot.data['events'];
+
+
   }
 
 

@@ -14,6 +14,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CreateEventComponent } from './events/create-event/create-event.component';
+import { Erro404Component } from './errors/erro404.component';
+import { EventRouteActivatorService } from './_services/event-route-activator.service';
+import { EventListResolverService } from './_services/event-list-resolver.service';
 
 @NgModule({
   declarations: [                               // pipes and conponents            
@@ -22,7 +25,8 @@ import { CreateEventComponent } from './events/create-event/create-event.compone
     ThumbNailContainer,
     NavComponent,
     EventDetailsComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    Erro404Component,
   ],
   imports: [                                    // importing a modules 
     BrowserModule,
@@ -31,7 +35,22 @@ import { CreateEventComponent } from './events/create-event/create-event.compone
     AppRoutingModule
     
   ],
-  providers: [EventService],                                // for services 
+  providers: [
+    EventService, 
+    EventRouteActivatorService,
+    { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState},
+    EventListResolverService
+  ],                                // for services 
   bootstrap: [EventsAppComponent]
 })
 export class AppModule { }
+
+// for unsaved work in our form to post 
+export function checkDirtyState(component: CreateEventComponent) {
+
+  if (component.isDirty) {
+    return window.confirm('You have unsaved work, do you really want to cancel?');
+  }
+
+  return true;
+}
