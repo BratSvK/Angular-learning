@@ -1,22 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { EventsAppComponent } from './events-app.component';
-import { ThumbNailContainer } from './events/event-thumbnail/event-thumbnail.component';
-
-import { EventsListComponent } from './events/events-list.component';
 import { NavComponent } from './events/nav/navbar.components';
-import { EventService } from './_services/event.service';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
-import { EventDetailsComponent } from './events/event-details/event-details.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CreateEventComponent } from './events/create-event/create-event.component';
 import { Erro404Component } from './errors/erro404.component';
-import { EventRouteActivatorService } from './_services/event-route-activator.service';
-import { EventListResolverService } from './_services/event-list-resolver.service';
+
+
+// added single import from barrels 
+import {
+  EventsListComponent,
+  ThumbNailContainer,
+  EventService,
+  EventDetailsComponent,
+  CreateEventComponent,
+  EventListResolverService,
+  EventRouteActivatorService
+  
+ } from './events/index';
+import { AuthService } from './_services/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SessionCreateComponent } from './events/event-details/session-create/session-create.component';
+import { SessionComponent } from './events/event-details/session/session.component';
+
+
+
 
 @NgModule({
   declarations: [                               // pipes and conponents            
@@ -27,19 +36,25 @@ import { EventListResolverService } from './_services/event-list-resolver.servic
     EventDetailsComponent,
     CreateEventComponent,
     Erro404Component,
+    SessionCreateComponent,
+    SessionComponent
   ],
   imports: [                                    // importing a modules 
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
     
   ],
+  // this is wide for every module across angular 
   providers: [
     EventService, 
     EventRouteActivatorService,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState},
-    EventListResolverService
+    EventListResolverService,
+    AuthService
   ],                                // for services 
   bootstrap: [EventsAppComponent]
 })

@@ -1,0 +1,7 @@
+em.error{
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+.error input {
+    background-color: salmon;
+}

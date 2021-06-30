@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IEvent } from 'src/app/_services';
 
 @Component({
     selector: 'event-thumbnail',
@@ -9,7 +10,7 @@ import { Component, Input } from '@angular/core';
 export class ThumbNailContainer {
     // for now it's like it is 
     // Input decorator for recieving a data from another component
-    @Input() event:any;
+    @Input() event: IEvent;
 
     logFoo() {
         console.log('Foo');
