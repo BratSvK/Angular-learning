@@ -16,15 +16,15 @@ import {
   EventDetailsComponent,
   CreateEventComponent,
   EventListResolverService,
-  EventRouteActivatorService
+  EventRouteActivatorService,
+  CollapsibleWellComponent,
+  SessionComponent,
+  SessionCreateComponent,
+  DurationPipe
   
  } from './events/index';
 import { AuthService } from './_services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SessionCreateComponent } from './events/event-details/session-create/session-create.component';
-import { SessionComponent } from './events/event-details/session/session.component';
-
-
 
 
 @NgModule({
@@ -37,7 +37,9 @@ import { SessionComponent } from './events/event-details/session/session.compone
     CreateEventComponent,
     Erro404Component,
     SessionCreateComponent,
-    SessionComponent
+    SessionComponent,
+    CollapsibleWellComponent,
+    DurationPipe
   ],
   imports: [                                    // importing a modules 
     BrowserModule,
